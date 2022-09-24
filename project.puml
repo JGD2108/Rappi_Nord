@@ -1,0 +1,50 @@
+@startuml
+
+Class user{
+nombre: str
+id: int
+ubicacion: str
+tel: int
+--
+pago()
+pedido()
+}
+
+Class domiciliario{
+nombreD: str
+tel: int
+--
+obtener_rating()
+disponibilidadD()
+}
+
+Class dunord{
+cafe: Cafe
+terrase: Terrase
+--
+modificarMenu()
+disponibilidadR()
+Escoger_Domiciliario()
+}
+
+Class cafe{
+menuC: dict
+}
+
+Class terrase{
+menuT: dict
+}
+
+Class domicilios{
+domiciliario: Domiciliario
+disponibilidad: disponibilidadD
+
+}
+
+cafe "*" --* "*" dunord
+terrase "*" --* "*" dunord
+domiciliario "*" --* "1" domicilios
+domicilios "*" --* "*" dunord 
+dunord "*" --* "1" user
+
+@enduml

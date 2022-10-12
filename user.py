@@ -1,13 +1,16 @@
 from restaurantes import Cafe, Terrase
 class User(Cafe,Terrase):
-    def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list,Total:int) -> None:
+    def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list, total:float) -> None:
         self.nombre = nombre
         self.id = id
         self.ubicacion = ubicacion
         self.tel = tel
+        self.carrito=[]
+        self.total=total
         
-    def pedido(self,Total):
-        carrito=[]
+    def pedido(self):
+        Total=0
+        Carrito=[]
         print("Escoja el restaurante a escoger")
         answer= input("1. Cafe, 2. Terrase")
         while(answer!="1" and answer!="2"):
@@ -19,7 +22,7 @@ class User(Cafe,Terrase):
                 item=input("Item:").title()
                 if item in Cafe.menuC:
                     Total+=Cafe.menuC[item]
-                    carrito.append(item)
+                    Carrito.append(item)
                 elif(item=="Stop"):
                     break
             print(f"Su total es: {Total}")
@@ -29,24 +32,31 @@ class User(Cafe,Terrase):
                 item=input("Item:").title()
                 if item in Terrase.menuT:
                     Total+=Terrase.menuT[item]
-                    carrito.append(item)
+                    Carrito.append(item)
                 elif(item=="Stop"):
                     break
             print(f"Su total es: {Total}")
-            for a in carrito:
+            for a in Carrito:
                 print (a)
-        return Total,carrito
+        self.total=Total
+        self.carrito=Carrito
+        return self.carrito, self.total
 
     def pago(self):
             print("Digite con que desea pagar")
             while True:
-                print("1. Datafono")
-                print("2. Efectivo")
-                opc=input()
+                opc=input("1. Datafono \t 2. Efectivo: " )
                 if opc=="1" or opc=="2":
                     break
             if opc=="1":
-                pass
+                print(f"Su total es de: {self.total}")
+                self.carrito.append("Datafono")
+            else:
+                print(f"Su total es de: {self.total}")
+                self.carrito.append("Efectivo")
+            print(self.carrito)
+            return self.carrito
+
     
     def __repr__(self) -> str:
         pass

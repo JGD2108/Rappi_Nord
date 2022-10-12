@@ -1,3 +1,7 @@
 from user import User
+from dunord import Dunord
 
-User.pedido(User,0)
+##User.pedido(User)
+##User.pago(User)
+
+Dunord.modificarMenu(Dunord)

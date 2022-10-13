@@ -11,11 +11,16 @@ class Dunord():
 ## A modificar menu se le pasan como atributo los objetos de terrase y cafe
 
     def modificarMenu(self):
-        try:
+        """
+        Como sabemos que el menu es un diccionario utilizamos del, update etc..
+        """
+        while True:
             print("Que menu desea cambiar?")
             opc= input("1. Cafe \t 2. Terrase: ")
-        except (opc<1 and opc>2):
-            print("Escoja una opcion valida")
+            if opc=="1" or opc=="2":
+                break
+            else:
+                print("Escoja una opcion valida")
         if opc=="1":
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
@@ -26,7 +31,7 @@ class Dunord():
                         del Cafe.menuC[key] ##Eliminar el cambio solicitado
                         break
                 print(Cafe.menuC)
-           ## self.cafe.menuC por que no funciona? 
+           ## self.cafe.menuC por que no funciona?  
 
 
 

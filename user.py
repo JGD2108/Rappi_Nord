@@ -9,6 +9,9 @@ class User(Cafe,Terrase):
         self.total=total
         
     def pedido(self):
+        """
+        Esta funcion va a calcular según el restaurante cuanto es el total de lo que desea el usuario
+        """
         Total=0
         Carrito=[]
         print("Escoja el restaurante a escoger")
@@ -42,12 +45,16 @@ class User(Cafe,Terrase):
         self.carrito=Carrito
         return self.carrito, self.total
 
-    def pago(self):
-            print("Digite con que desea pagar")
-            while True:
-                opc=input("1. Datafono \t 2. Efectivo: " )
-                if opc=="1" or opc=="2":
-                    break
+    def pago(self): 
+        """
+        Decidimos meter en la lista del carrito con que metodo van a pagar para ver
+        Con que metodo desea pagar
+        """
+        print("Digite con que desea pagar")
+        while True:
+            opc=input("1. Datafono \t 2. Efectivo: " )
+            if opc=="1" or opc=="2":
+                break
             if opc=="1":
                 print(f"Su total es de: {self.total}")
                 self.carrito.append("Datafono")

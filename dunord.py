@@ -14,6 +14,8 @@ class Dunord():
         """
         Como sabemos que el menu es un diccionario utilizamos del, update etc..
         """
+        self.cafe= Cafe(Cafe.menuC)
+        self.terrase = Terrase(Terrase.menuT)
         while True:
             print("Que menu desea cambiar?")
             opc= input("1. Cafe \t 2. Terrase: ")
@@ -24,13 +26,13 @@ class Dunord():
         if opc=="1":
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
+                print(self.cafe.menuC)
                 Cambio = input("Digite el elemento a eliminar").title()
-                for key in Cafe.menuC:
+                for key in self.cafe.menuC:
                     if Cambio in key:
-                        print(Cafe.menuC)
-                        del Cafe.menuC[key] ##Eliminar el cambio solicitado
+                        del self.cafe.menuC[key] ##Eliminar el cambio solicitado
                         break
-                print(Cafe.menuC) ## self.cafe.menuC por que no funciona? 
+                print(self.cafe.menuC) ## self.cafe.menuC por que no funciona? 
             else: 
                 Cambio = input("Digite el elemento a añadir").title()
                 try:
@@ -39,19 +41,18 @@ class Dunord():
                     print("Digite un numero valido")
                 precio = float(precio)
                 new = {Cambio: precio}
-                Cafe.menuC.update(new)
-
-                print(Cafe.menuC)
+                self.cafe.menuC.update(new)
+                print(self.cafe.menuC)
         else:
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
-                print(Terrase.menuT)
+                print(self.terrase.menuT)
                 Cambio = input("Digite el elemento a eliminar").title()
-                for key in Terrase.menuT:
+                for key in self.terrase.menuT:
                     if Cambio in key:
-                        del Terrase.menuT[key] ##Eliminar el cambio solicitado
+                        del self.terrase.menuT[key] ##Eliminar el cambio solicitado
                         break
-                print(Terrase.menuT)
+                print(self.terrase.menuT)
             else:
                 Cambio = input("Digite el elemento a añadir").title()
                 try:
@@ -60,7 +61,8 @@ class Dunord():
                     print("Digite un numero valido")
                 precio = float(precio)
                 new = {Cambio: precio}
-                Terrase.menuT.update(new)
+                self.terrase.menuT.update(new)
+        return self.cafe.menuC, self.terrase.menuT
  
 
 
@@ -73,3 +75,10 @@ class Dunord():
     def Escoger_Domiciliario():
         pass
 
+
+    def proceso():
+        print("Que desea realizar administrador?")
+        try:
+            opc= input("Escoja 1. Modificar Menu.")
+        except ValueError:
+            print("Escoja un numero")

@@ -45,13 +45,22 @@ class Dunord():
         else:
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
+                print(Terrase.menuT)
                 Cambio = input("Digite el elemento a eliminar").title()
                 for key in Terrase.menuT:
                     if Cambio in key:
-                        print(Terrase.menuT)
                         del Terrase.menuT[key] ##Eliminar el cambio solicitado
                         break
                 print(Terrase.menuT)
+            else:
+                Cambio = input("Digite el elemento a añadir").title()
+                try:
+                    precio = input("Digite el precio del elemento")
+                except ValueError:
+                    print("Digite un numero valido")
+                precio = float(precio)
+                new = {Cambio: precio}
+                Terrase.menuT.update(new)
  
 
 
@@ -63,4 +72,4 @@ class Dunord():
 
     def Escoger_Domiciliario():
         pass
-Dunord.modificarMenu(Dunord)
+

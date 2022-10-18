@@ -1,7 +1,7 @@
-from user import User
+from user import User, Sistema
 from dunord import Dunord
 
 ##User.pedido(User)
 ##User.pago(User)
-
-Dunord.modificarMenu(Dunord)
+x=[]
+Sistema("Jose",1001,"Cafe", 3043774896,x,0)

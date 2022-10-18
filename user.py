@@ -1,4 +1,5 @@
 from restaurantes import Cafe, Terrase
+from dunord import Dunord,Domicilios
 class User(Cafe,Terrase):
     def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list, total:float) -> None:
         self.nombre = nombre
@@ -55,15 +56,28 @@ class User(Cafe,Terrase):
             opc=input("1. Datafono \t 2. Efectivo: " )
             if opc=="1" or opc=="2":
                 break
-            if opc=="1":
-                print(f"Su total es de: {self.total}")
-                self.carrito.append("Datafono")
-            else:
-                print(f"Su total es de: {self.total}")
-                self.carrito.append("Efectivo")
-            print(self.carrito)
-            return self.carrito
+        if opc=="1":
+            print(f"Su total es de: {self.total}")
+            self.carrito.append("Datafono")
+        else:
+            print(f"Su total es de: {self.total}")
+            self.carrito.append("Efectivo")
+        print(self.carrito)
+        return self.carrito
+    
+    def proceso():
+        User.pedido(User)
+        User.pago(User)
+
 
     
     def __repr__(self) -> str:
         pass
+
+class Sistema(User, Dunord):
+    opc=input("Es usted usuario o administrador?")
+    if opc=="1":
+        User.proceso()
+    elif opc=="2":
+        Dunord.modificarMenu(Dunord)
+    

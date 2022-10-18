@@ -30,8 +30,29 @@ class Dunord():
                         print(Cafe.menuC)
                         del Cafe.menuC[key] ##Eliminar el cambio solicitado
                         break
+                print(Cafe.menuC) ## self.cafe.menuC por que no funciona? 
+            else: 
+                Cambio = input("Digite el elemento a añadir").title()
+                try:
+                    precio = input("Digite el precio del elemento")
+                except ValueError:
+                    print("Digite un numero valido")
+                precio = float(precio)
+                new = {Cambio: precio}
+                Cafe.menuC.update(new)
+
                 print(Cafe.menuC)
-           ## self.cafe.menuC por que no funciona?  
+        else:
+            opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
+            if opc1=="1":
+                Cambio = input("Digite el elemento a eliminar").title()
+                for key in Terrase.menuT:
+                    if Cambio in key:
+                        print(Terrase.menuT)
+                        del Terrase.menuT[key] ##Eliminar el cambio solicitado
+                        break
+                print(Terrase.menuT)
+ 
 
 
 

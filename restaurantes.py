@@ -9,7 +9,7 @@ class Cafe:
         "Super Quesadilla": 9.50,
         "Taco": 3.00,
         "Tortilla Salad": 8.00
-    }
+    } 
     def __init__(self, menuC: dict) -> None:
         self.menuC = menuC
         

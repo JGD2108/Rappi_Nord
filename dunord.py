@@ -1,5 +1,7 @@
+from colorama import Cursor
 from restaurantes import Cafe, Terrase
 from domicilios import Domicilios
+import sqlite3
 ##comit
 
 class Dunord():
@@ -24,7 +26,10 @@ class Dunord():
             else:
                 print("Escoja una opcion valida")
         if opc=="1":
-            opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
+            cafe = sqlite3.connect("Cafe_menu.db")
+            c = cafe.cursor()
+            c.execute('DELETE FROM menu;,') ## Borrar toda la información de la Base de datos 
+            opc1= input("1. Eliminar Elemento, 2. Añadir Elemento")
             if opc1=="1":
                 print(self.cafe.menuC)
                 Cambio = input("Digite el elemento a eliminar").title()
@@ -44,6 +49,9 @@ class Dunord():
                 self.cafe.menuC.update(new)
                 print(self.cafe.menuC)
         else:
+            terrase = sqlite3.connect("Terrase_menu.db")
+            c = terrase.cursor()
+            c.execute('DELETE FROM menu;,') ## Borrar toda la información de la Base de datos 
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
                 print(self.terrase.menuT)
@@ -63,8 +71,6 @@ class Dunord():
                 new = {Cambio: precio}
                 self.terrase.menuT.update(new)
         return self.cafe.menuC, self.terrase.menuT
- 
-
 
 
     def disponibilidadR():

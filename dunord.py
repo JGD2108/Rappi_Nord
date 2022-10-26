@@ -1,4 +1,3 @@
-from colorama import Cursor
 from restaurantes import Cafe, Terrase
 from domicilios import Domicilios
 import sqlite3
@@ -11,15 +10,6 @@ class Dunord():
         self.domicilios = domicilios
 
 ## A modificar menu se le pasan como atributo los objetos de terrase y cafe
-
-    def AñadirSql(self, con:sqlite3.connect, opc):
-        if opc==1:
-            self.cafe= Cafe(Cafe.menuC)
-            keys = list(self.cafe.menuC.keys())
-            values = list(self.cafe.menuC.values())
-            print (keys)
-        else: 
-            pass
     def modificarMenu(self):
         """
         Como sabemos que el menu es un diccionario utilizamos del, update etc..
@@ -57,16 +47,22 @@ class Dunord():
                 precio = float(precio)
                 new = {Cambio: precio}
                 self.cafe.menuC.update(new)
+                data = [(Cambio,precio)]
+                print(data)
+                c.executemany("INSERT INTO MENU VALUES(?, ?)",data)
+                cafe.commit()
                 print(self.cafe.menuC)
-                self.AñadirSql(cafe,1)
         else:
+            print(self.terrase.menuT)
             terrase = sqlite3.connect("Terrase_menu.db")
-            c = terrase.cursor()
-            c.execute('DELETE FROM menu;') ## Borrar toda la información de la Base de datos 
+            c = terrase.cursor() 
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
                 print(self.terrase.menuT)
                 Cambio = input("Digite el elemento a eliminar").title()
+                c.execute('''SELECT * from menu''')
+                c.execute("DELETE FROM menu WHERE item = ?", [Cambio])
+                terrase.commit()
                 for key in self.terrase.menuT:
                     if Cambio in key:
                         del self.terrase.menuT[key] ##Eliminar el cambio solicitado
@@ -80,6 +76,9 @@ class Dunord():
                     print("Digite un numero valido")
                 precio = float(precio)
                 new = {Cambio: precio}
+                data = [(Cambio,precio)]
+                c.executemany(" INSERT INTO menu VALUES(?,?)",data)
+                terrase.commit()
                 self.terrase.menuT.update(new)
         return self.cafe.menuC, self.terrase.menuT
     
@@ -94,6 +93,7 @@ class Dunord():
 ## En escoger domiciliario va de parametro domicilios para poder escoger el domiciliario y ver su disponibilidad
 
     def Escoger_Domiciliario():
+        
         pass
 
 

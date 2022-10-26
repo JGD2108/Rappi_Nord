@@ -44,10 +44,12 @@ class Terrase:
     for i in range (len(x)):
         item = x[i]
         Price = z[i]
+        print(item)
+        print(Price)
         new = {item:Price}
         menuT.update(new)
     def __init__(self, menuT: dict) -> None:
         self.menuT = menuT
         print(self.menuT)
-
-Cafe.escribir(Cafe)
+    def escribir(self):
+        print(self.menuT)

@@ -69,8 +69,6 @@ class User(Cafe,Terrase):
         User.pedido(User)
         User.pago(User)
 
-
-    
     def __repr__(self) -> str:
         pass
 

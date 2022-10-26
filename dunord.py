@@ -1,7 +1,6 @@
 from restaurantes import Cafe, Terrase
 from domicilios import Domicilios
 import sqlite3
-##comit
 
 class Dunord():
     def __init__(self, terrase: Terrase, domicilios: Domicilios, cafe: Cafe) -> None:
@@ -14,6 +13,7 @@ class Dunord():
         """
         Como sabemos que el menu es un diccionario utilizamos del, update etc..
         """
+        ## Creación de los objetos 
         self.cafe= Cafe(Cafe.menuC)
         self.terrase = Terrase(Terrase.menuT)
         while True:
@@ -24,19 +24,17 @@ class Dunord():
             else:
                 print("Escoja una opcion valida")
         if opc=="1":
-            cafe = sqlite3.connect("Cafe_menu.db")
-            c = cafe.cursor() 
             opc1= input("1. Eliminar Elemento, 2. Añadir Elemento")
             if opc1=="1":
+                print("Recuerde que este es el menu:")
                 print(self.cafe.menuC)
                 Cambio = input("Digite el elemento a eliminar").title()
-                c.execute('''SELECT * from MENU''')
-                c.execute("DELETE FROM MENU WHERE item = ?", [Cambio])
-                cafe.commit()
+                Dunord.Eliminarsql(Dunord, 1, Cambio)
                 for key in self.cafe.menuC:
                     if Cambio in key:
                         del self.cafe.menuC[key] ##Eliminar el cambio solicitado
                         break
+                print("Así queda el Menu")
                 print(self.cafe.menuC) ## self.cafe.menuC por que no funciona? 
             else: 
                 Cambio = input("Digite el elemento a añadir").title()
@@ -48,25 +46,21 @@ class Dunord():
                 new = {Cambio: precio}
                 self.cafe.menuC.update(new)
                 data = [(Cambio,precio)]
-                print(data)
-                c.executemany("INSERT INTO MENU VALUES(?, ?)",data)
-                cafe.commit()
+                Dunord.AñadirSql(self,1,data)
+                print("Así queda el menu")
                 print(self.cafe.menuC)
         else:
-            print(self.terrase.menuT)
-            terrase = sqlite3.connect("Terrase_menu.db")
-            c = terrase.cursor() 
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
+                print("Recuerde el menu")
                 print(self.terrase.menuT)
                 Cambio = input("Digite el elemento a eliminar").title()
-                c.execute('''SELECT * from menu''')
-                c.execute("DELETE FROM menu WHERE item = ?", [Cambio])
-                terrase.commit()
+                Dunord.Eliminarsql(Dunord, 2, Cambio)
                 for key in self.terrase.menuT:
                     if Cambio in key:
                         del self.terrase.menuT[key] ##Eliminar el cambio solicitado
                         break
+                print("Así queda el menu")
                 print(self.terrase.menuT)
             else:
                 Cambio = input("Digite el elemento a añadir").title()
@@ -77,15 +71,44 @@ class Dunord():
                 precio = float(precio)
                 new = {Cambio: precio}
                 data = [(Cambio,precio)]
-                c.executemany(" INSERT INTO menu VALUES(?,?)",data)
-                terrase.commit()
+                Dunord.AñadirSql(Dunord,2,data)
                 self.terrase.menuT.update(new)
         return self.cafe.menuC, self.terrase.menuT
     
-
         
-        
+    def Eliminarsql(self, opc:int, string:str):
+        """
+        Esta función ejecuta los comando necesarios para eliminar 
+        un dato en específico de una fila de la base de datos
+        """
+        cafe = sqlite3.connect("Cafe_menu.db")
+        terrase = sqlite3.connect("Terrase_menu.db")
+        c = cafe.cursor()
+        t = terrase.cursor()
+        if opc==1:
+            c.execute('''SELECT * from MENU''')
+            c.execute("DELETE FROM MENU WHERE item = ?", [string])
+            cafe.commit()
+        elif opc==2:
+            t.execute('''SELECT * from menu''')
+            t.execute("DELETE FROM MENU WHERE item=?", [string])
+            terrase.commit()
 
+    def AñadirSql(self,opc:int, data):
+        """
+        Esta Función ejecuta los comando para añadir
+        un nuevo producto a la base de datos
+        """
+        cafe = sqlite3.connect("Cafe_menu.db")
+        terrase = sqlite3.connect("Terrase_menu.db")
+        c = cafe.cursor()
+        t = terrase.cursor()
+        if opc==1:
+            c.executemany(" INSERT INTO menu VALUES(?,?)",data)
+            cafe.commit()
+        elif opc==2:
+            t.executemany(" INSERT INTO menu VALUES(?,?)",data)
+            terrase.commit()
 
     def disponibilidadR():
         pass
@@ -93,7 +116,6 @@ class Dunord():
 ## En escoger domiciliario va de parametro domicilios para poder escoger el domiciliario y ver su disponibilidad
 
     def Escoger_Domiciliario():
-        
         pass
 
 

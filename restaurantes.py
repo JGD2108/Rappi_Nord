@@ -14,7 +14,6 @@ class Cafe:
         Price=''
         for item in row:
             z.append(item)
-    print(z)
     menuC={}
     for i in range (len(x)):
         item = x[i]
@@ -23,6 +22,9 @@ class Cafe:
         menuC.update(new)
     def __init__(self, menuC: dict) -> None:
         self.menuC = menuC
+        print(self.menuC)
+    def escribir(self):
+        print(self.menuC)
         
 class Terrase:
     menuT={}
@@ -39,7 +41,6 @@ class Terrase:
         Price=''
         for item in row:
             z.append(item)
-    print(z)
     for i in range (len(x)):
         item = x[i]
         Price = z[i]
@@ -47,5 +48,6 @@ class Terrase:
         menuT.update(new)
     def __init__(self, menuT: dict) -> None:
         self.menuT = menuT
+        print(self.menuT)
 
-    
+Cafe.escribir(Cafe)

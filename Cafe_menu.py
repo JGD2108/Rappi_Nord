@@ -1,6 +1,13 @@
 import sqlite3
 con = sqlite3.connect("Cafe_menu.db")
 cur = con.cursor()
+"""
+cur.execute("DROP TABLE IF EXISTS menu")
+sql="""##CREATE TABLE MENU(
+        ##item TEXT,
+        ##Price INT
+##)"""
+
 
 data = [
         ("Baja Taco", 4.00),
@@ -13,5 +20,10 @@ data = [
         ("Taco", 3.00),
         ("Tortilla Salad", 8.00) ]
 
-cur.executemany("INSERT INTO menu VALUES(?, ?)", data)
+cur.executemany("INSERT INTO MENU VALUES(?, ?)", data)
 con.commit()
+"""
+cur.execute(sql)
+con.commit()
+con.close()
+"""

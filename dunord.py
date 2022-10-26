@@ -12,6 +12,14 @@ class Dunord():
 
 ## A modificar menu se le pasan como atributo los objetos de terrase y cafe
 
+    def AñadirSql(self, con:sqlite3.connect, opc):
+        if opc==1:
+            self.cafe= Cafe(Cafe.menuC)
+            keys = list(self.cafe.menuC.keys())
+            values = list(self.cafe.menuC.values())
+            print (keys)
+        else: 
+            pass
     def modificarMenu(self):
         """
         Como sabemos que el menu es un diccionario utilizamos del, update etc..
@@ -27,12 +35,14 @@ class Dunord():
                 print("Escoja una opcion valida")
         if opc=="1":
             cafe = sqlite3.connect("Cafe_menu.db")
-            c = cafe.cursor()
-            c.execute('DELETE FROM menu;,') ## Borrar toda la información de la Base de datos 
+            c = cafe.cursor() 
             opc1= input("1. Eliminar Elemento, 2. Añadir Elemento")
             if opc1=="1":
                 print(self.cafe.menuC)
                 Cambio = input("Digite el elemento a eliminar").title()
+                c.execute('''SELECT * from MENU''')
+                c.execute("DELETE FROM MENU WHERE item = ?", [Cambio])
+                cafe.commit()
                 for key in self.cafe.menuC:
                     if Cambio in key:
                         del self.cafe.menuC[key] ##Eliminar el cambio solicitado
@@ -48,10 +58,11 @@ class Dunord():
                 new = {Cambio: precio}
                 self.cafe.menuC.update(new)
                 print(self.cafe.menuC)
+                self.AñadirSql(cafe,1)
         else:
             terrase = sqlite3.connect("Terrase_menu.db")
             c = terrase.cursor()
-            c.execute('DELETE FROM menu;,') ## Borrar toda la información de la Base de datos 
+            c.execute('DELETE FROM menu;') ## Borrar toda la información de la Base de datos 
             opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
             if opc1=="1":
                 print(self.terrase.menuT)
@@ -71,6 +82,10 @@ class Dunord():
                 new = {Cambio: precio}
                 self.terrase.menuT.update(new)
         return self.cafe.menuC, self.terrase.menuT
+    
+
+        
+        
 
 
     def disponibilidadR():

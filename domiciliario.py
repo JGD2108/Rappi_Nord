@@ -1,75 +1,101 @@
-from abc import abstractmethod,ABCMeta
-import json
-from typing import Dict
-class InternalState(metaclass= ABCMeta):
-    @abstractmethod
-    def changeState(self):
-        pass
-class Available(InternalState):
-    def changeSate(self):
-        print("Available Person")
-
-class Occupied(InternalState):
-    def changeSate(self):
-        print("Occupied Person")
-
+from __future__ import annotations
+from abc import abstractclassmethod, ABC, abstractmethod
+import sqlite3
 class Domiciliario:
-    def __init__(self, nombreD: str, telD: int) -> None:
-        self.nombreD = nombreD
-        self.telD = telD
-        self.state = None
-
-    def setState(self,status):
-        self.state=status
-
-    def getState(self):
-        return self.state
+    _state = None
+    def __init__(self, Domi:dict, state:State) -> None:
+        self.Domi = Domi
+        self.setDomi(state)
     
-    def changeState(self):
-        self.state.changeState()
-
-
-class Flyweight():
-    """
-    The Flyweight stores a common portion of the state (also called intrinsic
-    state) that belongs to multiple real business entities. The Flyweight
-    accepts the rest of the state (extrinsic state, unique for each entity) via
-    its method parameters.
-    """
-    def __init__(self, sharedState:str) -> None:
-        self.sharedState = sharedState
-    def operation(self, uniqueState:str) -> None:
-        s = json.dumps(self._sharedState)
-        u = json.dumps(uniqueState)
-        
-
-class FlyweightFactory():
-    """
-    The Flyweight Factory creates and manages the Flyweight objects. It ensures
-    that flyweights are shared correctly. When the client requests a flyweight,
-    the factory either returns an existing instance or creates a new one, if it
-    doesn't exist yet.
-    """
-    _domiciliarios: Dict[str, Flyweight]={}
-
-    def __init__(self, initialFlyweight: Dict) -> None:
-        for state in initialFlyweight:
-            self._domiciliarios[self.get_key(state)] = Flyweight(state)
+    def setDomi(self, state:State):
+        self._state = state
+        self._state.domiciliario = self
     
-    def get_key(self, state:Dict) -> None:
-        return "_".join(sorted(state))
-
-    def getFlyweight(self,shared_state:Dict) -> Flyweight:
-        """
-        Returns an existing Flyweight with a given state or creates a new one.
-        """
-        key = self.get_key(shared_state)
-
-        if not self._domiciliarios(key):
-            self._domiciliarios[key]= Flyweight(shared_state)
-        
-        return self._domiciliarios[key]
+    def presentState(self):
+        print(f"Domiciliario esta en {type(self._state).__name__}")
     
-    def listFlyweights(self)->None:
-        count = len(self._domiciliarios)
+    def makeAvailable(self, key):
+        self._state.makeAvailable()
+        x="Available"
+        self.Domi[key] = x
+        return self.Domi
+
+    
+    def makeOccupied(self,key):
+        self._state.makeOccupied()
+        x="Occupied"
+        self.Domi[key] = x
+        return self.Domi
+    
+
+class State(ABC):
+    @property
+    def domiciliario(self)->Domiciliario:
+        return self._domiciliario
+
+    @domiciliario.setter
+    def domiciliario(self, domiciliario:Domiciliario)->None:
+        self._domiciliario = domiciliario
+    
+    @abstractmethod
+    def makeAvailable(self)->None:
+        pass
+
+    @abstractmethod
+    def makeOccupied(self)->None:
+        pass
+
+class Available(State):
+    def makeAvailable(self) -> None:
+        print("Already available")
+    
+    def makeOccupied(self) -> None:
+        self.domiciliario.setDomi(Ocuppied())
+
+class Ocuppied(State):
+    def makeAvailable(self) -> None:
+        self.domiciliario.setDomi(Available())
+     
+    def makeOccupied(self) -> None:
+        print("Already Occupied")
+
+class Hola():
+    con = sqlite3.connect("Domiciliario.db")
+    cur = con.cursor()
+    x=[]
+    for row in cur.execute("SELECT NAME FROM RegDomi"):
+        str = ''
+        for item in row:
+            str = str + item
+        x.append(str)
+    Domi={}
+    for i in range (len(x)):
+            Name = x[i]
+            new = {Name:"Available"}
+            Domi.update(new)
+    def __init__(self, Domi:dict) -> None:
+        self.Domi = Domi
+    def hola(self):
+        _state = None
+        myDom = Domiciliario(self.Domi,Available())
+        while True:
+            for key,value in self.Domi.items():
+                if value=="Available":
+                    myDom.makeOccupied(key)
+                    print(self.Domi)
+                    break
+            break
+        return self.Domi
+    
+
+
+
+
+
+
+    
+
+
+
+
 

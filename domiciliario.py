@@ -3,6 +3,19 @@ from abc import ABC, abstractmethod
 import sqlite3
 class Domiciliario:
     _state = None
+    con = sqlite3.connect("Domiciliario.db")
+    cur = con.cursor()
+    x=[]
+    for row in cur.execute("SELECT NAME FROM RegDomi"):
+        str = ''
+        for item in row:
+            str = str + item
+        x.append(str)
+    Domi={}
+    for i in range (len(x)):
+            Name = x[i]
+            new = {Name:"Available"}
+            Domi.update(new)
     def __init__(self, Domi:dict, state:State) -> None:
         self.Domi = Domi
         self.setDomi(state)
@@ -59,40 +72,27 @@ class Ocuppied(State):
     def makeOccupied(self) -> None:
         print("Already Occupied")
 
-class Hola():
-    con = sqlite3.connect("Domiciliario.db")
-    cur = con.cursor()
-    x=[]
-    for row in cur.execute("SELECT NAME FROM RegDomi"):
-        str = ''
-        for item in row:
-            str = str + item
-        x.append(str)
-    Domi={}
-    for i in range (len(x)):
-            Name = x[i]
-            new = {Name:"Available"}
-            Domi.update(new)
-    def __init__(self, Domi:dict) -> None:
-        self.Domi = Domi
-    def hola(self):
-        _state = None
-        myDom = Domiciliario(self.Domi,Available())
+class Estado():
+    def __init__(self, Dom:Domiciliario) -> None:
+        self.Dom = Dom
+    def makeOcupado(self):
+        myDom = Domiciliario(self.Dom.Domi,Available())
         while True:
-            for key,value in self.Domi.items():
+            for key,value in self.Dom.Domi.items():
                 if value=="Available":
                     myDom.makeOccupied(key)
-                    print(self.Domi)
+                    print(self.Dom.Domi)
                     break
             break
-        return self.Domi
-
-
-
-
-    
-
-
-
-
+        return self.Dom.Domi
+    def makeDisponible(self):
+        myDom = Domiciliario(self.Dom.Domi, Ocuppied())
+        while True:
+            for key,value in self.Dom.Domi.items():
+                if value=="Occupied":
+                    myDom.makeAvailable(key)
+                    print(self.Dom.Domi)
+                    break
+            break
+        return self.Dom.Domi
 

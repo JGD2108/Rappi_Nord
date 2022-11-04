@@ -50,6 +50,5 @@ class Terrase:
         menuT.update(new)
     def __init__(self, menuT: dict) -> None:
         self.menuT = menuT
-        print(self.menuT)
     def escribir(self):
         print(self.menuT)

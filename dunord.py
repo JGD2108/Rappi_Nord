@@ -115,18 +115,7 @@ class Dunord():
 
 
     def Escoger_Domiciliario(self):
-        sw=0
-        for key,value in Hola.Domi.items():
-            if value=="Available":
-                print(key)
-                self.domicilios = key
-                sw=1
-                return self.domicilios
-        if sw==0:
-            print("No hay domiciliarios disponibles")
-        else: 
-            print(f"Su domiciliario es: {self.domicilios}")
-        
+        pass
 
 
     def proceso():

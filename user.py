@@ -1,5 +1,5 @@
 from restaurantes import Cafe, Terrase
-from dunord import Dunord,Domicilios
+from dunord import Dunord
 class User(Cafe,Terrase):
     def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list, total:float) -> None:
         self.nombre = nombre
@@ -17,6 +17,7 @@ class User(Cafe,Terrase):
         Carrito=[]
         print("Escoja el restaurante a escoger")
         answer= input("1. Cafe, 2. Terrase")
+        x=[]
         while(answer!="1" and answer!="2"):
             print("escoja 1 o 2")
             answer= input("1. Cafe '\t' 2. Terrase")
@@ -26,7 +27,7 @@ class User(Cafe,Terrase):
                 item=input("Item:").title()
                 if item in Cafe.menuC:
                     Total+=Cafe.menuC[item]
-                    Carrito.append(item)
+                    x.append(item)
                 elif(item=="Stop"):
                     break
             print(f"Su total es: {Total}")
@@ -36,10 +37,12 @@ class User(Cafe,Terrase):
                 item=input("Item:").title()
                 if item in Terrase.menuT:
                     Total+=Terrase.menuT[item]
-                    Carrito.append(item)
+                    x.append(item)
                 elif(item=="Stop"):
                     break
             print(f"Su total es: {Total}")
+            Carrito.append(x)
+            Carrito.append(Total)
             for a in Carrito:
                 print (a)
         self.total=Total
@@ -63,8 +66,8 @@ class User(Cafe,Terrase):
             print(f"Su total es de: {self.total}")
             self.carrito.append("Efectivo")
         print(self.carrito)
-        return self.carrito
-    
+
+
     def proceso():
         User.pedido(User)
         User.pago(User)
@@ -72,10 +75,9 @@ class User(Cafe,Terrase):
     def __repr__(self) -> str:
         pass
 
-class Sistema(User, Dunord):
+class Sistema(User):
     opc=input("Es usted usuario o administrador?")
     if opc=="1":
         User.proceso()
     elif opc=="2":
         Dunord.modificarMenu(Dunord)
-    

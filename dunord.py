@@ -1,6 +1,5 @@
 from restaurantes import Cafe, Terrase
 from domicilios import Domicilios
-from domiciliario import Hola
 import sqlite3
 
 class Dunord():
@@ -114,10 +113,20 @@ class Dunord():
     def disponibilidadR():
         pass
 
-## En escoger domiciliario va de parametro domicilios para poder escoger el domiciliario y ver su disponibilidad
 
-    def Escoger_Domiciliario():
-        pass
+    def Escoger_Domiciliario(self):
+        sw=0
+        for key,value in Hola.Domi.items():
+            if value=="Available":
+                print(key)
+                self.domicilios = key
+                sw=1
+                return self.domicilios
+        if sw==0:
+            print("No hay domiciliarios disponibles")
+        else: 
+            print(f"Su domiciliario es: {self.domicilios}")
+        
 
 
     def proceso():

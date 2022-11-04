@@ -1,5 +1,5 @@
 from __future__ import annotations
-from abc import abstractclassmethod, ABC, abstractmethod
+from abc import ABC, abstractmethod
 import sqlite3
 class Domiciliario:
     _state = None
@@ -86,9 +86,6 @@ class Hola():
                     break
             break
         return self.Domi
-    
-
-
 
 
 

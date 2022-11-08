@@ -84,4 +84,8 @@ class Sistema(User):
     if opc=="1":
         User.proceso()
     elif opc=="2":
-        Dunord.modificarMenu(Dunord)
+        opc = input("1. Desea modificar menus o 2.modificar domiciliarios? ")
+        if opc==1:
+            Dunord.modificarMenu(Dunord)
+        else: 
+            Dunord.modificarDomiciliarios(Dunord)

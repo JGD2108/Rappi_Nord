@@ -119,7 +119,24 @@ class Dunord():
             domiciliario.commit()
     
     def modificarDomiciliarios(self):
-        pass
+        """
+        Registrar un domiciliario o Eliminarlo
+        """
+        print("ESCOJA QUE DESEA REALIZAR")
+        opc = input("1. Registrar; 2.Eliminar ")
+        while opc<1 and opc>2:
+            print("Opción invalida")
+            opc = input("1. Registrar; 2.Eliminar ")
+        if opc==1:
+            Name = input("Digite el nombre ").title()
+            Id = input("Digite el Id ")
+            Cel = input("Digite el Celular")
+            data=[(Name, Id, Cel, "Available")]
+            Dunord.AñadirSql(Dunord,3,data)
+        else: 
+            Name = input("Digite el nombre del domiciliario a Eliminar")
+            Dunord.Eliminarsql(Dunord,3,Name)
+
 
 
     def disponibilidadR():

@@ -6,7 +6,7 @@ class Domiciliario:
     con = sqlite3.connect("Domiciliario.db")
     cur = con.cursor()
     x=[]
-    for row in cur.execute("SELECT NAME FROM RegDomi"): ##Seleccionar los nombres del sql
+    for row in cur.execute("SELECT NAME FROM Domiciliarios"): ##Seleccionar los nombres del sql
         str = ''
         for item in row:
             str = str + item

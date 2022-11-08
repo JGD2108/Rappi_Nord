@@ -1,16 +1,16 @@
 import sqlite3
 class Cafe:
     menuC={}
-    cafe = sqlite3.connect("Cafe_menu.db")
+    cafe = sqlite3.connect("Menus.db")
     cur = cafe.cursor()
     x=[]
-    for row in cur.execute("SELECT item FROM menu"):
+    for row in cur.execute("SELECT Item FROM Cafe"):
         str = ''
         for item in row:
             str = str + item
         x.append(str)
     z=[]
-    for row in cur.execute("SELECT Price FROM menu"):
+    for row in cur.execute("SELECT Price FROM Cafe"):
         Price=''
         for item in row:
             z.append(item)
@@ -28,16 +28,16 @@ class Cafe:
         
 class Terrase:
     menuT={}
-    terrase = sqlite3.connect("Terrase_menu.db")
+    terrase = sqlite3.connect("Menus.db")
     cur = terrase.cursor()
     x=[]
-    for row in cur.execute("SELECT item FROM menu"):
+    for row in cur.execute("SELECT Item FROM Terrase"):
         str = ''
         for item in row:
             str = str + item
         x.append(str)
     z=[]
-    for row in cur.execute("SELECT Price FROM menu"):
+    for row in cur.execute("SELECT Price FROM Terrase"):
         Price=''
         for item in row:
             z.append(item)

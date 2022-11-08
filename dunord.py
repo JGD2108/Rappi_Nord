@@ -104,20 +104,19 @@ class Dunord():
         Esta Función ejecuta los comando para añadir
         un nuevo producto a la base de datos
         """
-        cafe = sqlite3.connect("Cafe_menu.db")
-        terrase = sqlite3.connect("Terrase_menu.db")
+        menus = sqlite3.connect("Menus.db")
         domiciliario = sqlite3.connect("Domiciliarios.db")
-        c = cafe.cursor()
-        t = terrase.cursor()
+        m = menus.cursor()
         d = domiciliario.cursor()
         if opc==1:
-            c.executemany(" INSERT INTO menu VALUES(?,?)",data)
-            cafe.commit()
+            m.executemany(" INSERT INTO Cafe VALUES(?,?)",data)
+            menus.commit()
         elif opc==2:
-            t.executemany(" INSERT INTO menu VALUES(?,?)",data)
-            terrase.commit()
+            m.executemany(" INSERT INTO Terrase VALUES(?,?)",data)
+            menus.commit()
         elif opc==3:
             d.executemany("INSERT into RegDomi Values(?,?,?,?)",data)
+            domiciliario.commit()
     
     def modificarDomiciliarios(self):
         pass

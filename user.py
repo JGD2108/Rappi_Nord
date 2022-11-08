@@ -31,6 +31,10 @@ class User(Cafe,Terrase):
                 elif(item=="Stop"):
                     break
             print(f"Su total es: {Total}")
+            Carrito.append(x)
+            Carrito.append(Total)
+            for a in Carrito:
+                print (a)
         elif(answer=="2"):
             print("Digite stop cuando desee parar")
             while True:

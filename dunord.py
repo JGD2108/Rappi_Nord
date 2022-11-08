@@ -8,7 +8,6 @@ class Dunord():
         self.terrase = terrase
         self.domicilios = domicilios
 
-## A modificar menu se le pasan como atributo los objetos de terrase y cafe
     def modificarMenu(self):
         """
         Como sabemos que el menu es un diccionario utilizamos del, update etc..
@@ -83,8 +82,10 @@ class Dunord():
         """
         cafe = sqlite3.connect("Cafe_menu.db")
         terrase = sqlite3.connect("Terrase_menu.db")
+        domiciliario = sqlite3.connect("Domiciliario.db")
         c = cafe.cursor()
         t = terrase.cursor()
+        d = domiciliario.cursor()
         if opc==1:
             c.execute('''SELECT * from MENU''')
             c.execute("DELETE FROM MENU WHERE item = ?", [string])
@@ -93,6 +94,10 @@ class Dunord():
             t.execute('''SELECT * from menu''')
             t.execute("DELETE FROM MENU WHERE item=?", [string])
             terrase.commit()
+        elif opc==3:
+            d.execute('''SELECT * FROM Domiciliarios''')
+            d.execute("DELETE FROM Domiciliario WHERE Name = ?"[string])
+
 
     def AñadirSql(self,opc:int, data):
         """
@@ -101,14 +106,22 @@ class Dunord():
         """
         cafe = sqlite3.connect("Cafe_menu.db")
         terrase = sqlite3.connect("Terrase_menu.db")
+        domiciliario = sqlite3.connect("Domiciliarios.db")
         c = cafe.cursor()
         t = terrase.cursor()
+        d = domiciliario.cursor()
         if opc==1:
             c.executemany(" INSERT INTO menu VALUES(?,?)",data)
             cafe.commit()
         elif opc==2:
             t.executemany(" INSERT INTO menu VALUES(?,?)",data)
             terrase.commit()
+        elif opc==3:
+            d.executemany("INSERT into RegDomi Values(?,?,?,?)",data)
+    
+    def modificarDomiciliarios(self):
+        pass
+
 
     def disponibilidadR():
         pass

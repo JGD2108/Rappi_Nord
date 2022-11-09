@@ -28,7 +28,8 @@ class Dunord():
                 print("Recuerde que este es el menu:")
                 print(self.cafe.menuC)
                 Cambio = input("Digite el elemento a eliminar").title()
-                Dunord.Eliminarsql(Dunord, 1, Cambio)
+                data= [Cambio]
+                Dunord.Eliminarsql(Dunord, 1, data)
                 for key in self.cafe.menuC:
                     if Cambio in key:
                         del self.cafe.menuC[key] ##Eliminar el cambio solicitado
@@ -54,7 +55,8 @@ class Dunord():
                 print("Recuerde el menu")
                 print(self.terrase.menuT)
                 Cambio = input("Digite el elemento a eliminar").title()
-                Dunord.Eliminarsql(Dunord, 2, Cambio)
+                data=[Cambio]
+                Dunord.Eliminarsql(Dunord, 2, data)
                 for key in self.terrase.menuT:
                     if Cambio in key:
                         del self.terrase.menuT[key] ##Eliminar el cambio solicitado
@@ -80,23 +82,19 @@ class Dunord():
         Esta función ejecuta los comando necesarios para eliminar 
         un dato en específico de una fila de la base de datos
         """
-        cafe = sqlite3.connect("Cafe_menu.db")
-        terrase = sqlite3.connect("Terrase_menu.db")
+        menu = sqlite3.connect("Menus.db")
         domiciliario = sqlite3.connect("Domiciliario.db")
-        c = cafe.cursor()
-        t = terrase.cursor()
         d = domiciliario.cursor()
+        m = menu.cursor()
         if opc==1:
-            c.execute('''SELECT * from MENU''')
-            c.execute("DELETE FROM MENU WHERE item = ?", [string])
-            cafe.commit()
+            m.execute("DELETE FROM Cafe WHERE Item = ?", (string))
+            menu.commit()
         elif opc==2:
-            t.execute('''SELECT * from menu''')
-            t.execute("DELETE FROM MENU WHERE item=?", [string])
-            terrase.commit()
+            m.execute("DELETE FROM Terrase WHERE Item=?", (string))
+            menu.commit()
         elif opc==3:
-            d.execute('''SELECT * FROM Domiciliarios''')
-            d.execute("DELETE FROM Domiciliario WHERE Name = ?"[string])
+            d.execute("DELETE FROM Domiciliarios WHERE Name = ?", (string))
+            domiciliario.commit()
 
 
     def AñadirSql(self,opc:int, data):
@@ -105,7 +103,7 @@ class Dunord():
         un nuevo producto a la base de datos
         """
         menus = sqlite3.connect("Menus.db")
-        domiciliario = sqlite3.connect("Domiciliarios.db")
+        domiciliario = sqlite3.connect("Domiciliario.db")
         m = menus.cursor()
         d = domiciliario.cursor()
         if opc==1:
@@ -115,7 +113,7 @@ class Dunord():
             m.executemany(" INSERT INTO Terrase VALUES(?,?)",data)
             menus.commit()
         elif opc==3:
-            d.executemany("INSERT into RegDomi Values(?,?,?,?)",data)
+            d.executemany("INSERT INTO Domiciliarios VALUES(?,?,?,?)",data)
             domiciliario.commit()
     
     def modificarDomiciliarios(self):
@@ -124,10 +122,12 @@ class Dunord():
         """
         print("ESCOJA QUE DESEA REALIZAR")
         opc = input("1. Registrar; 2.Eliminar ")
-        while opc<1 and opc>2:
+        opcNew = int(opc)
+        while opcNew<1 and opcNew>2:
             print("Opción invalida")
             opc = input("1. Registrar; 2.Eliminar ")
-        if opc==1:
+            opcNew= int(opc)
+        if opcNew==1:
             Name = input("Digite el nombre ").title()
             Id = input("Digite el Id ")
             Cel = input("Digite el Celular")
@@ -135,7 +135,8 @@ class Dunord():
             Dunord.AñadirSql(Dunord,3,data)
         else: 
             Name = input("Digite el nombre del domiciliario a Eliminar")
-            Dunord.Eliminarsql(Dunord,3,Name)
+            data=[Name]
+            Dunord.Eliminarsql(Dunord,3,data)
 
 
 

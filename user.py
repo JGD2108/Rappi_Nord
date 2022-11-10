@@ -1,5 +1,6 @@
 from restaurantes import Cafe, Terrase
 from dunord import Dunord
+import sqlite3
 class User(Cafe,Terrase):
     def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list, total:float) -> None:
         self.nombre = nombre
@@ -70,6 +71,28 @@ class User(Cafe,Terrase):
             print(f"Su total es de: {self.total}")
             self.carrito.append("Efectivo")
         print(self.carrito)
+        return self.carrito
+    
+    def Ubicacion(self):
+        """
+        Esta Función le pedira al usuario que digite 
+        su ubicación
+        """
+        print("Digite su ubicación")
+        location = input("Digite su ubicación")
+        self.ubicacion = location
+        ## ubicacion es un atributo de la clase usuario
+        ## se le asigna lo que digita el usuario
+        return self.ubicacion
+
+    def Pedido(self):
+        """
+        Esta función va a formalizar el pedido, 
+        lo insertará en la base de datos pedidos
+        """
+        conection= sqlite3.connect("Domiciliario.db")
+        pedido = conection.cursor()
+
 
 
     def proceso():

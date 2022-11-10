@@ -28,12 +28,18 @@ class Login():
         else:
             print("Welcome")
     def execute():
-        opc = input("1. Usuario o 2. administrador: ")
-        opc = int(opc)
-        if opc==1:
-            Login.compareUser()
+        opc1= input("Login o Register")
+        opc1 = int(opc1)
+        if opc1==1:
+            opc = input("1. Usuario o 2. administrador: ")
+            opc = int(opc)
+            if opc==1:
+                Login.compareUser()
+            else: 
+                Login.compareAdmin()
         else: 
-            Login.compareAdmin()
+            ##Register
+            pass
 
 Login.execute()
     

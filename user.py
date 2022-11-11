@@ -47,7 +47,7 @@ class User(Cafe,Terrase):
                     break
             print(f"Su total es: {Total}")
             Carrito.append(x)
-            Carrito.append(Total)
+
             for a in Carrito:
                 print (a)
         self.total=Total
@@ -98,6 +98,7 @@ class User(Cafe,Terrase):
     def proceso():
         User.pedido(User)
         User.pago(User)
+        User.Ubicacion(User)
 
     def __repr__(self) -> str:
         pass

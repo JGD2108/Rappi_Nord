@@ -1,6 +1,8 @@
 import sqlite3
+from Users import Register
 con = sqlite3.connect("Register.db")
 cur = con.cursor()
+
 class Login():
     def get_name():
         Usuario = input("Digite su Usuario: ")
@@ -27,8 +29,10 @@ class Login():
             print("Login failed")
         else:
             print("Welcome")
+    def getInfo():
+        Nombre = con.executemany
     def execute():
-        opc1= input("Login o Register")
+        opc1= input("1.Login o 2.Register")
         opc1 = int(opc1)
         if opc1==1:
             opc = input("1. Usuario o 2. administrador: ")
@@ -37,9 +41,8 @@ class Login():
                 Login.compareUser()
             else: 
                 Login.compareAdmin()
-        else: 
-            ##Register
-            pass
+        else:
+            Register.Registrar()
 
 Login.execute()
     

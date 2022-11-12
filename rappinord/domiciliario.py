@@ -3,15 +3,30 @@ from abc import ABC, abstractmethod
 import sqlite3
 
 class Domiciliario:
-    def __init__(self) -> None:
-        self.occupied_state = OcuppiedState()
-        self.available_state = AvailableState()
-        
-        self.state = self.occupied_state
+    def __init__(self, Domi:dict, state:State) -> None:
+        self.Domi = Domi
+        self.setDomi(state)
     
-    def set_state(self, state: State):
-        self.state = state
+    def setDomi(self, state:State):
+        self._state = state
+        self._state.domiciliario = self
+    
+    def presentState(self):
+        print(f"Domiciliario esta en {type(self._state).__name__}")
+    
+    def makeAvailable(self, key):
+        self._state.makeAvailable()
+        x="Available"
+        self.Domi[key] = x
+        return self.Domi
+    
+    def makeOccupied(self,key):
+        self._state.makeOccupied()
+        x="Occupied"
+        self.Domi[key] = x
+        return self.Domi
 
+    _state = None
     con = sqlite3.connect("Domiciliario.db")
     cur = con.cursor()
     x=[]
@@ -26,48 +41,61 @@ class Domiciliario:
             new = {Name:"Available"}
             Domi.update(new)
 
-    def presentState(self):
-        print(f"Domiciliario esta en {type(self.state).__name__}")
+class State(ABC):
+    @property
+    def domiciliario(self)->Domiciliario:
+        return self._domiciliario
+
+    @domiciliario.setter
+    def domiciliario(self, domiciliario:Domiciliario)->None:
+        self._domiciliario = domiciliario
     
-    def makeAvailable(self, key):
-        self.state.available
-        x="Available"
-        self.Domi[key] = x
-        return self.Domi
+    @abstractmethod
+    def makeAvailable(self)->None:
+        pass
 
-    def makeOccupied(self,key):
-        self.state.occupied
-        x="Occupied"
-        self.Domi[key] = x
-        return self.Domi
+    @abstractmethod
+    def makeOccupied(self)->None:
+        pass
+
+class Available(State):
+    def makeAvailable(self) -> None:
+        print("Already available")
     
+    def makeOccupied(self) -> None:
+        self.domiciliario.setDomi(Ocuppied())
 
-class State():
-    def makeOcuppied(self):
-        raise NotImplementedError
+class Ocuppied(State):
+    def makeAvailable(self) -> None:
+        self.domiciliario.setDomi(Available())
+     
+    def makeOccupied(self) -> None:
+        print("Already Occupied")
 
-    def makeAvailable(self):
-        raise NotImplementedError
+class Estado():
+    def __init__(self, Dom:Domiciliario) -> None:
+        self.Dom = Dom
+    def makeOcupado(self):
+        myDom = Domiciliario(self.Dom.Domi,Available())
+        while True:
+            for key,value in self.Dom.Domi.items():
+                if value=="Available":
+                    myDom.makeOccupied(key)
+                    print(self.Dom.Domi)
+                    break
+            break
+        return self.Dom.Domi
+    def makeDisponible(self):
+        myDom = Domiciliario(self.Dom.Domi, Ocuppied())
+        while True:
+            for key,value in self.Dom.Domi.items():
+                if value=="Occupied":
+                    myDom.makeAvailable(key)
+                    print(self.Dom.Domi)
+                    break
+            break
+        return self.Dom.Domi
 
-class OcuppiedState(State):
-    def __init__(self, context: Domiciliario) -> None:
-        self.context = context
-    
-    def available(self):
-        self.context.set_state(self.context.available_state)
-        print("Estás disponible para hacer domicilios")
-
-    def occupied(self):
-        print("No te encuentras disponible para hacer domicilios")
-
-class AvailableState(State):
-    def __init__(self, context: Domiciliario):
-        self.context = context
-
-    def occupied(self):
-        self.context.set_state(self.context.occupied_state)
-        print("No puedes hacer domicilios")
-
-    def available(self):
-        print("Actualemente ya te encuentras disponible para hacer domicilios")
-    
+class process():
+    def execute():
+        pass

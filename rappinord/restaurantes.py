@@ -1,6 +1,9 @@
 import sqlite3
 
 class Cafe:
+    def __init__(self, menuC: dict) -> None:
+        self.menuC = menuC
+
     menuC={}
     cafe = sqlite3.connect("Menus.db")
     cur = cafe.cursor()
@@ -17,16 +20,18 @@ class Cafe:
         Price=''
         for item in row:
             z.append(item)
-            
+
     for i in range (len(x)):
         item = x[i]
         Price = z[i]
         new = {item:Price}
         menuC.update(new)
-    def __init__(self, menuC: dict) -> None:
-        self.menuC = menuC
+    
         
 class Terrase:
+    def __init__(self, menuT: dict) -> None:
+        self.menuT = menuT
+
     menuT={}
     terrase = sqlite3.connect("Menus.db")
     cur = terrase.cursor()
@@ -51,6 +56,3 @@ class Terrase:
         print(Price)
         new = {item:Price}
         menuT.update(new)
-
-    def __init__(self, menuT: dict) -> None:
-        self.menuT = menuT

@@ -40,8 +40,7 @@ class Login():
             print("Login failed")
         else:
             print("Welcome")
-        
-        
+ 
     def getInfo(Usuario: str):
         statement = (f"SELECT * FROM Users where User = '{Usuario}'")
         cur.execute(statement)
@@ -51,7 +50,8 @@ class Login():
         id = record[4]
         x = []
         total = 0
-        user = User(nombre,id,cel,x,total)
+        ubicacion = ""
+        user = User(nombre ,id ,cel ,x , total, ubicacion)
         user.Pedido()
 
     def execute():

@@ -13,7 +13,7 @@ class Dunord():
         Como sabemos que el menu es un diccionario utilizamos del, update etc..
         """
         ## Creación de los objetos 
-        self.cafe= Cafe(Cafe.menuC)
+        self.cafe = Cafe(Cafe.menuC)
         self.terrase = Terrase(Terrase.menuT)
         while True:
             print("Que menu desea cambiar?")

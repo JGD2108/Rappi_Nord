@@ -2,12 +2,13 @@ from rappinord.restaurantes import Cafe, Terrase
 from rappinord.dunord import Dunord
 import sqlite3
 class User(Cafe,Terrase):
-    def __init__(self, nombre: str, id: int, tel: int, carrito:list, total:float) -> None:
+    def __init__(self, nombre: str, id: int, tel: int, carrito: list, total: int, ubicacion: str) -> None:
         self.nombre = nombre
         self.id = id
         self.tel = tel
-        self.carrito=[]
-        self.total=total
+        self.carrito = carrito
+        self.total = total
+        self.ubicacion = ubicacion
         
     def pedido(self):
         """
@@ -16,42 +17,42 @@ class User(Cafe,Terrase):
         Total=0
         Carrito=[]
         print("Escoja el menú del restaurante a pedir: ")
-        answer= input("1. Cafe, 2. Terrase")
+        answer= input("1. Cafe; 2. Terrase: ")
         x=[]
         while(answer!="1" and answer!="2"):
             print("escoja 1 o 2")
-            answer= input("1. Cafe '\t' 2. Terrase")
+            answer= input("1. Cafe; 2. Terrase: ")
         if answer=="1":
             print("Digite stop cuando desee parar")
             while True:
-                item=input("Item:").title()
+                item=input("Item: ").title()
                 if item in Cafe.menuC:
                     Total+=Cafe.menuC[item]
                     x.append(item)
                 elif(item=="Stop"):
                     break
-            print(f"Su total es: {Total}")
             Carrito.append(x)
-            Carrito.append(Total)
-            for a in Carrito:
-                print (a)
         elif(answer=="2"):
             print("Digite stop cuando desee parar")
             while True:
-                item=input("Item:").title()
+                item=input("Item: ").title()
                 if item in Terrase.menuT:
                     Total+=Terrase.menuT[item]
                     x.append(item)
                 elif(item=="Stop"):
                     break
-            print(f"Su total es: {Total}")
             Carrito.append(x)
+            
+        Ubicacion = input("Digite su ubicación detallada: ")
+        for a in Carrito:
+            print (a)
+        print(f"Su total es: {Total}")
 
-            for a in Carrito:
-                print (a)
-        self.total=Total
-        self.carrito=Carrito
-        return self.carrito, self.total
+        caracter = ", "
+        self.total = Total
+        self.carrito = caracter.join(map(str, Carrito))
+        self.ubicacion = Ubicacion
+
 
     def pago(self): 
         """
@@ -71,14 +72,6 @@ class User(Cafe,Terrase):
             self.carrito.append("Efectivo")
         print(self.carrito)
         return self.carrito
-    
-    def Ubicacion(self):
-        """
-        Esta Función le pedira al usuario que digite 
-        su ubicación
-        """
-        location = input("Digite su ubicación")
-        return location
 
     def Pedido(self):
         """
@@ -87,7 +80,7 @@ class User(Cafe,Terrase):
         """
         conection= sqlite3.connect("Domiciliario.db")
         pedido = conection.cursor()
-        data =[(self.nombre, User.proceso(), self.total, User.Ubicacion(), self.tel)]
+        data =[(self.nombre, self.carrito, self.total, self.ubicacion, self.tel)]
         pedido.executemany("INSERT INTO Pedidos VALUES(?,?,?,?,?)", data)
         conection.commit()
         conection.close()

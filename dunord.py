@@ -148,9 +148,14 @@ class Dunord():
         pass
 
 
-    def proceso():
-        print("Que desea realizar administrador?")
-        try:
-            opc= input("Escoja 1. Modificar Menu.")
-        except ValueError:
-            print("Escoja un numero")
+    class proceso():
+       def execute():
+        while True:
+            opc = input("1. Desea modificar menus, 2. Modificar domiciliarios?, 3. Cerrar")
+            opc = int(opc)
+            if opc == 1:
+                Dunord.modificarMenu(Dunord)
+            elif opc == 2:
+                Dunord.modificarDomiciliarios(Dunord)
+            elif opc == 3:
+                break

@@ -17,17 +17,17 @@ class Dunord():
         self.terrase = Terrase(Terrase.menuT)
         while True:
             print("Que menu desea cambiar?")
-            opc= input("1. Cafe \t 2. Terrase: ")
+            opc= input("1. Cafe; 2. Terrase: ")
             if opc=="1" or opc=="2":
                 break
             else:
-                print("Escoja una opcion valida")
+                print("Escoja una opcion valida: ")
         if opc=="1":
-            opc1= input("1. Eliminar Elemento, 2. Añadir Elemento")
+            opc1= input("1. Eliminar Elemento; 2. Añadir Elemento: ")
             if opc1=="1":
                 print("Recuerde que este es el menu:")
                 print(self.cafe.menuC)
-                Cambio = input("Digite el elemento a eliminar").title()
+                Cambio = input("Digite el elemento a eliminar: ").title()
                 data= [Cambio]
                 Dunord.Eliminarsql(Dunord, 1, data)
                 for key in self.cafe.menuC:
@@ -37,11 +37,11 @@ class Dunord():
                 print("Así queda el Menu")
                 print(self.cafe.menuC) ## self.cafe.menuC por que no funciona? 
             else: 
-                Cambio = input("Digite el elemento a añadir").title()
+                Cambio = input("Digite el elemento a añadir: ").title()
                 try:
-                    precio = input("Digite el precio del elemento")
+                    precio = input("Digite el precio del elemento: ")
                 except ValueError:
-                    print("Digite un numero valido")
+                    print("Digite un numero valido: ")
                 precio = float(precio)
                 new = {Cambio: precio}
                 self.cafe.menuC.update(new)
@@ -50,11 +50,11 @@ class Dunord():
                 print("Así queda el menu")
                 print(self.cafe.menuC)
         else:
-            opc1= input("1. Eliminar Elmento, 2. Añadir Elemento")
+            opc1= input("1. Eliminar Elmento, 2. Añadir Elemento: ")
             if opc1=="1":
                 print("Recuerde el menu")
                 print(self.terrase.menuT)
-                Cambio = input("Digite el elemento a eliminar").title()
+                Cambio = input("Digite el elemento a eliminar: ").title()
                 data=[Cambio]
                 Dunord.Eliminarsql(Dunord, 2, data)
                 for key in self.terrase.menuT:
@@ -64,11 +64,11 @@ class Dunord():
                 print("Así queda el menu")
                 print(self.terrase.menuT)
             else:
-                Cambio = input("Digite el elemento a añadir").title()
+                Cambio = input("Digite el elemento a añadir: ").title()
                 try:
-                    precio = input("Digite el precio del elemento")
+                    precio = input("Digite el precio del elemento: ")
                 except ValueError:
-                    print("Digite un numero valido")
+                    print("Digite un numero valido: ")
                 precio = float(precio)
                 new = {Cambio: precio}
                 data = [(Cambio,precio)]
@@ -121,41 +121,36 @@ class Dunord():
         Registrar un domiciliario o Eliminarlo
         """
         print("ESCOJA QUE DESEA REALIZAR")
-        opc = input("1. Registrar; 2.Eliminar ")
+        opc = input("1. Registrar; 2.Eliminar: ")
         opcNew = int(opc)
         while opcNew<1 and opcNew>2:
             print("Opción invalida")
-            opc = input("1. Registrar; 2.Eliminar ")
+            opc = input("1. Registrar; 2.Eliminar: ")
             opcNew= int(opc)
         if opcNew==1:
-            Name = input("Digite el nombre ").title()
-            Id = input("Digite el Id ")
-            Cel = input("Digite el Celular")
+            Name = input("Digite el nombre: ").title()
+            Id = input("Digite el Id: ")
+            Cel = input("Digite el Celular: ")
             data=[(Name, Id, Cel, "Available")]
             Dunord.AñadirSql(Dunord,3,data)
         else: 
-            Name = input("Digite el nombre del domiciliario a Eliminar")
+            Name = input("Digite el nombre del domiciliario a Eliminar: ")
             data=[Name]
             Dunord.Eliminarsql(Dunord,3,data)
-
-
 
     def disponibilidadR():
         pass
 
-
     def Escoger_Domiciliario(self):
         pass
 
-
-    class proceso():
-       def execute():
+class proceso():
+    def execute():
         while True:
-            opc = input("1. Desea modificar menus, 2. Modificar domiciliarios?, 3. Cerrar")
-            opc = int(opc)
+            opc = int(input("1. Desea modificar menus; 2. Modificar domiciliarios; 3. Cerrar: "))
             if opc == 1:
                 Dunord.modificarMenu(Dunord)
             elif opc == 2:
-                Dunord.modificarDomiciliarios(Dunord)
+                 Dunord.modificarDomiciliarios(Dunord)
             elif opc == 3:
                 break

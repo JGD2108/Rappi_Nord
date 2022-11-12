@@ -1,4 +1,5 @@
 import sqlite3
+import stdiomask
 con = sqlite3.connect("Register.db")
 register = con.cursor()
 """
@@ -7,10 +8,12 @@ administrador = [("Jg2108", "1001915145", "Jose", "3043774896", "1001915145"),
 register.executemany("INSERT INTO Users VALUES(?,?,?,?,?)",administrador)
 con.commit()
 con.close()"""
+
 class Register():
     def get_Name():
         Name=input("Digite su nombre")
         return Name
+
     def get_User():
         while True: 
             User= input("Digite el usuario que desea")
@@ -22,9 +25,11 @@ class Register():
             else:
                 print("Usuario ya existe intente de nuevo")
         return User
+
     def get_Password():
-        Password= input("Digite su contraseña")
+        Password= stdiomask.getpass("Digite su contraseña")
         return Password
+
     def getCel():
         try:
             Cel = input("Digite su cel")

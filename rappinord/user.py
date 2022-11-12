@@ -58,7 +58,7 @@ class User(Cafe,Terrase):
         Decidimos meter en la lista del carrito con que metodo van a pagar para ver
         Con que metodo desea pagar
         """
-        print("Digite con que desea pagar")
+        print("Digite con que desea pagar: ")
         while True:
             opc=input("1. Datafono \t 2. Efectivo: " )
             if opc=="1" or opc=="2":

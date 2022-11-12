@@ -58,7 +58,7 @@ class Login():
         opc1= int(input("1.Login; 2.Register: "))
         if opc1 == 1:
             while True:
-                opc = int(input("1. Usuario; 2. administrador: "))
+                opc = int(input("1. Usuario; 2. administrador; 3. Domiciliario: "))
                 if opc == 1:
                     Login.compareUser()
                     break

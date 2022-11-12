@@ -1,5 +1,4 @@
 from rappinord.restaurantes import Cafe, Terrase
-from rappinord.dunord import Dunord
 import sqlite3
 class User(Cafe,Terrase):
     def __init__(self, nombre: str, id: int, tel: int, carrito: list, total: int, ubicacion: str) -> None:
@@ -51,6 +50,7 @@ class User(Cafe,Terrase):
         caracter = ", "
         self.total = Total
         self.carrito = caracter.join(map(str, Carrito))
+        print(self.carrito)
         self.ubicacion = Ubicacion
 
 

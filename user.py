@@ -5,7 +5,6 @@ class User(Cafe,Terrase):
     def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list, total:float) -> None:
         self.nombre = nombre
         self.id = id
-        self.ubicacion = ubicacion
         self.tel = tel
         self.carrito=[]
         self.total=total
@@ -78,12 +77,8 @@ class User(Cafe,Terrase):
         Esta Función le pedira al usuario que digite 
         su ubicación
         """
-        print("Digite su ubicación")
         location = input("Digite su ubicación")
-        self.ubicacion = location
-        ## ubicacion es un atributo de la clase usuario
-        ## se le asigna lo que digita el usuario
-        return self.ubicacion
+        return location
 
     def Pedido(self):
         """
@@ -92,25 +87,13 @@ class User(Cafe,Terrase):
         """
         conection= sqlite3.connect("Domiciliario.db")
         pedido = conection.cursor()
-
-
+        data =[(self.nombre, User.proceso(), self.total, User.Ubicacion(), self.tel)]
+        pedido.executemany("INSERT INTO Pedidos VALUES(?,?,?,?,?)", data)
+        conection.commit()
+        conection.close()
 
     def proceso():
         User.pedido(User)
-        User.pago(User)
-        User.Ubicacion(User)
 
     def __repr__(self) -> str:
         pass
-
-class Sistema(User):
-    opc=input("Es usted usuario o administrador?")
-    if opc=="1":
-        User.proceso()
-    elif opc=="2":
-        opc = input("1. Desea modificar menus o 2.modificar domiciliarios? ")
-        opc = int(opc)
-        if opc==1:
-            Dunord.modificarMenu(Dunord)
-        elif opc==2: 
-            Dunord.modificarDomiciliarios(Dunord)

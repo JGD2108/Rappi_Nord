@@ -22,9 +22,6 @@ class Cafe:
         menuC.update(new)
     def __init__(self, menuC: dict) -> None:
         self.menuC = menuC
-        print(self.menuC)
-    def escribir(self):
-        print(self.menuC)
         
 class Terrase:
     menuT={}
@@ -50,5 +47,3 @@ class Terrase:
         menuT.update(new)
     def __init__(self, menuT: dict) -> None:
         self.menuT = menuT
-    def escribir(self):
-        print(self.menuT)

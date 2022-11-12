@@ -12,7 +12,7 @@ class Login():
         ## lo que el usuario escoja se busca en la tabla
         Usuario = input("Digite su usuario: ")
         Password = stdiomask.getpass("Password: ")
-        statement= (f"SELECT User from Users WHERE User='{Usuario}' AND Password = '{Password}'")
+        statement = (f"SELECT User from Users WHERE User = '{Usuario}' AND Password = '{Password}'")
         cur.execute(statement)
         if not cur.fetchone():  # An empty result evaluates to False.
             print("Login failed")
@@ -23,13 +23,24 @@ class Login():
     def compareAdmin():
         Usuario = input("Digite su usuario: ")
         Password = stdiomask.getpass("Password: ")
-        statement= (f"SELECT User from Admin WHERE User='{Usuario}' AND Password = '{Password}'")
+        statement = (f"SELECT User from Admin WHERE User = '{Usuario}' AND Password = '{Password}'")
         cur.execute(statement)
         if not cur.fetchone():  # An empty result evaluates to False.
             print("Login failed")
         else:
             print("Welcome", Usuario)
             proceso.execute()
+
+    def compareDomiciliario():
+        ID = input("Digite su ID: ")
+        Password = stdiomask.getpass("Password: ")
+        statement = (f"SELECT ID from Domiciliario WHERE ID = '{ID}' AND Password = '{Password}'")
+        cur.execute(statement)
+        if not cur.fetchone():
+            print("Login failed")
+        else:
+            print("Welcome")
+        
         
     def getInfo(Usuario: str):
         statement = (f"SELECT * FROM Users where User = '{Usuario}'")
@@ -46,10 +57,18 @@ class Login():
     def execute():
         opc1= int(input("1.Login; 2.Register: "))
         if opc1 == 1:
-            opc = int(input("1. Usuario; 2. administrador: "))
-            if opc == 1:
-                Login.compareUser()
-            else: 
-                Login.compareAdmin()
+            while True:
+                opc = int(input("1. Usuario; 2. administrador: "))
+                if opc == 1:
+                    Login.compareUser()
+                    break
+                elif opc == 2: 
+                    Login.compareAdmin()
+                    break
+                elif opc == 3:
+                    Login.compareDomiciliario()
+                    break
+                else:
+                    print("Intente de nuevo con una opción válida")
         else:
             Register.Registrar()

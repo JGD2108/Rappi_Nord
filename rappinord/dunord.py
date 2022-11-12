@@ -131,7 +131,7 @@ class Dunord():
             Name = input("Digite el nombre: ").title()
             Id = input("Digite el Id: ")
             Cel = input("Digite el Celular: ")
-            data=[(Name, Id, Cel, "Available")]
+            data=[(Name, Id, Cel, "Ocuppied")]
             Dunord.AñadirSql(Dunord,3,data)
         else: 
             Name = input("Digite el nombre del domiciliario a Eliminar: ")
@@ -151,6 +151,6 @@ class proceso():
             if opc == 1:
                 Dunord.modificarMenu(Dunord)
             elif opc == 2:
-                 Dunord.modificarDomiciliarios(Dunord)
+                Dunord.modificarDomiciliarios(Dunord)
             elif opc == 3:
                 break

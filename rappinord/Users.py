@@ -11,12 +11,12 @@ con.close()"""
 
 class Register():
     def get_Name():
-        Name=input("Digite su nombre")
+        Name=input("Digite su nombre: ")
         return Name
 
     def get_User():
         while True: 
-            User= input("Digite el usuario que desea")
+            User= input("Digite el usuario que desea: ")
             statement= (f"SELECT User from Users WHERE User='{User}'")
             register.execute(statement)
             if not register.fetchone(): 
@@ -27,24 +27,24 @@ class Register():
         return User
 
     def get_Password():
-        Password= stdiomask.getpass("Digite su contraseña")
+        Password= stdiomask.getpass("Digite su contraseña: ")
         return Password
 
     def getCel():
         try:
-            Cel = input("Digite su cel")
+            Cel = input("Digite su cel: ")
             while len(Cel)!=10:
-                print("Digite un numero de telefono valido")
-                Cel = input("Digite su cel")
+                print("Digite un numero de telefono valido: ")
+                Cel = input("Digite su cel: ")
         except ValueError:
-            print("Digite un numero")
+            print("Digite un número: ")
         return Cel
 
     def getId():
         try:
-            Id = input("Digite su ID")
+            Id = input("Digite su ID: ")
         except ValueError:
-            print("Digite un numero")
+            print("Digite un numero: ")
         return Id
     
     def Registrar():

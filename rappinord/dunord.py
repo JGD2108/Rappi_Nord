@@ -1,5 +1,5 @@
-from restaurantes import Cafe, Terrase
-from domicilios import Domicilios
+from rappinord.restaurantes import Cafe, Terrase
+from rappinord.domicilios import Domicilios
 import sqlite3
 
 class Dunord():

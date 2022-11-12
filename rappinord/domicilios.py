@@ -1,4 +1,4 @@
-from domiciliario import Domiciliario
+from rappinord.domiciliario import Domiciliario
 
 class Domicilios():
     def __init__(self, domiciliario: Domiciliario ) -> None:

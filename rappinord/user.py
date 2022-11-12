@@ -1,8 +1,8 @@
-from restaurantes import Cafe, Terrase
-from dunord import Dunord
+from rappinord.restaurantes import Cafe, Terrase
+from rappinord.dunord import Dunord
 import sqlite3
 class User(Cafe,Terrase):
-    def __init__(self, nombre: str, id: int, ubicacion: str, tel: int, carrito:list, total:float) -> None:
+    def __init__(self, nombre: str, id: int, tel: int, carrito:list, total:float) -> None:
         self.nombre = nombre
         self.id = id
         self.tel = tel
@@ -15,7 +15,7 @@ class User(Cafe,Terrase):
         """
         Total=0
         Carrito=[]
-        print("Escoja el restaurante a escoger")
+        print("Escoja el menú del restaurante a pedir: ")
         answer= input("1. Cafe, 2. Terrase")
         x=[]
         while(answer!="1" and answer!="2"):

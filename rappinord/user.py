@@ -52,6 +52,7 @@ class User(Cafe,Terrase):
         self.carrito = caracter.join(map(str, Carrito))
         print(self.carrito)
         self.ubicacion = Ubicacion
+        return self.carrito
 
 
     def pago(self): 
@@ -78,15 +79,13 @@ class User(Cafe,Terrase):
         Esta función va a formalizar el pedido, 
         lo insertará en la base de datos pedidos
         """
+        User.pedido(User)
         conection= sqlite3.connect("Domiciliario.db")
         pedido = conection.cursor()
         data =[(self.nombre, self.carrito, self.total, self.ubicacion, self.tel)]
         pedido.executemany("INSERT INTO Pedidos VALUES(?,?,?,?,?)", data)
         conection.commit()
         conection.close()
-
-    def proceso():
-        User.pedido(User)
 
     def __repr__(self) -> str:
         pass

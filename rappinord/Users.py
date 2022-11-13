@@ -1,4 +1,5 @@
 import sqlite3
+import stdiomask
 con = sqlite3.connect("Register.db")
 register = con.cursor()
 """

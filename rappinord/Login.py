@@ -1,4 +1,5 @@
 import sqlite3
+import stdiomask
 from rappinord.Users import Register
 from rappinord.user import User
 from rappinord.dunord import proceso

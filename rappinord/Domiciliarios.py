@@ -7,7 +7,7 @@ sql= """CREATE TABLE IF NOT EXISTS Pedidos(
         Pedido TEXT,
         Total FLOAT,
         Ubicacion TEXT,
-        Cel INT
+        Cel TEXT
         )"""
 
 

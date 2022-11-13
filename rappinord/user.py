@@ -1,7 +1,7 @@
 from rappinord.restaurantes import Cafe, Terrase
 import sqlite3
 class User(Cafe,Terrase):
-    def __init__(self, nombre: str, id: int, tel: int, carrito: list, total: int, ubicacion: str) -> None:
+    def __init__(self, nombre: str, id: int, tel: str, carrito: str, total: float, ubicacion: str) -> None:
         self.nombre = nombre
         self.id = id
         self.tel = tel
@@ -14,7 +14,6 @@ class User(Cafe,Terrase):
         Esta funcion va a calcular según el restaurante cuanto es el total de lo que desea el usuario
         """
         Total=0
-        Carrito=[]
         print("Escoja el menú del restaurante a pedir: ")
         answer= input("1. Cafe; 2. Terrase: ")
         x=[]
@@ -30,7 +29,6 @@ class User(Cafe,Terrase):
                     x.append(item)
                 elif(item=="Stop"):
                     break
-            Carrito.append(x)
         elif(answer=="2"):
             print("Digite stop cuando desee parar")
             while True:
@@ -40,19 +38,19 @@ class User(Cafe,Terrase):
                     x.append(item)
                 elif(item=="Stop"):
                     break
-            Carrito.append(x)
             
         Ubicacion = input("Digite su ubicación detallada: ")
-        for a in Carrito:
-            print (a)
         print(f"Su total es: {Total}")
 
-        caracter = ", "
+        caracter = ""
+        for object in x:
+            caracter = caracter + object + ","
         self.total = Total
-        self.carrito = caracter.join(map(str, Carrito))
-        print(self.carrito)
+        self.carrito = caracter
         self.ubicacion = Ubicacion
-        return self.carrito
+        print(self.total)
+        print(self.ubicacion)
+        return self.total, self.ubicacion, self.carrito
 
 
     def pago(self): 
@@ -67,11 +65,12 @@ class User(Cafe,Terrase):
                 break
         if opc=="1":
             print(f"Su total es de: {self.total}")
-            self.carrito.append("Datafono")
+            self.carrito = self.carrito + ','+ "Datafono"
         else:
             print(f"Su total es de: {self.total}")
-            self.carrito.append("Efectivo")
+            self.carrito = self.carrito + "Efectivo"
         print(self.carrito)
+        setattr(User,self.carrito, self.carrito)
         return self.carrito
 
     def Pedido(self):
@@ -79,13 +78,16 @@ class User(Cafe,Terrase):
         Esta función va a formalizar el pedido, 
         lo insertará en la base de datos pedidos
         """
-        User.pedido(User)
         conection= sqlite3.connect("Domiciliario.db")
         pedido = conection.cursor()
         data =[(self.nombre, self.carrito, self.total, self.ubicacion, self.tel)]
         pedido.executemany("INSERT INTO Pedidos VALUES(?,?,?,?,?)", data)
         conection.commit()
         conection.close()
+    def Proceso(User):
+        User.pedido()
+        User.pago()
+        User.Pedido()
 
     def __repr__(self) -> str:
         pass

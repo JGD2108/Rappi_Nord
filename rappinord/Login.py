@@ -48,11 +48,11 @@ class Login():
         nombre = record[2]
         cel = record[3]
         id = record[4]
-        x = []
+        x = ""
         total = 0
         ubicacion = ""
         user = User(nombre ,id ,cel ,x , total, ubicacion)
-        user.Pedido()
+        user.Proceso()
 
     def execute():
         opc1= int(input("1.Login; 2.Register: "))

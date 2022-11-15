@@ -13,8 +13,8 @@ sql= """CREATE TABLE IF NOT EXISTS Pedidos(
 
 """
 data = [
-        ("Jose David",1001915145, 3043774896, "Available"),
-        ("Cristian", 1001915145, 310554675, "Available"),
+        ("Jose David",1001915145, 3043774896, "Ocuppied"),
+        ("Cristian", 1001915145, 310554675, "Ocuppied"),
          ]
 
 cur.executemany("INSERT INTO Domiciliarios VALUES(?, ?, ?,?)", data)

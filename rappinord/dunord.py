@@ -138,12 +138,6 @@ class Dunord():
             data=[Name]
             Dunord.Eliminarsql(Dunord,3,data)
 
-    def disponibilidadR():
-        pass
-
-    def Escoger_Domiciliario(self):
-        pass
-
 class proceso():
     def execute():
         while True:

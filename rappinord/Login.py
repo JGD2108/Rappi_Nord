@@ -3,6 +3,8 @@ import stdiomask
 from rappinord.Users import Register
 from rappinord.user import User
 from rappinord.dunord import proceso
+from rappinord.domicilios import Domicilios
+
 con = sqlite3.connect("Register.db")
 cur = con.cursor()
 
@@ -40,6 +42,7 @@ class Login():
             print("Login failed")
         else:
             print("Welcome")
+            Domicilios.get_infoD(ID)
  
     def getInfo(Usuario: str):
         statement = (f"SELECT * FROM Users where User = '{Usuario}'")

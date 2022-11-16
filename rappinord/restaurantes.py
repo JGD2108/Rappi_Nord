@@ -1,58 +1,59 @@
 import sqlite3
 
+
 class Cafe:
     def __init__(self, menuC: dict) -> None:
         self.menuC = menuC
 
-    menuC={}
+    menuC = {}
     cafe = sqlite3.connect("Menus.db")
     cur = cafe.cursor()
-    x=[]
+    x = []
 
     for row in cur.execute("SELECT Item FROM Cafe"):
         str = ''
         for item in row:
             str = str + item
         x.append(str)
-    z=[]
+    z = []
 
     for row in cur.execute("SELECT Price FROM Cafe"):
-        Price=''
+        Price = ''
         for item in row:
             z.append(item)
 
-    for i in range (len(x)):
+    for i in range(len(x)):
         item = x[i]
         Price = z[i]
-        new = {item:Price}
+        new = {item: Price}
         menuC.update(new)
-    
-        
+
+
 class Terrase:
     def __init__(self, menuT: dict) -> None:
         self.menuT = menuT
 
-    menuT={}
+    menuT = {}
     terrase = sqlite3.connect("Menus.db")
     cur = terrase.cursor()
-    x=[]
+    x = []
 
     for row in cur.execute("SELECT Item FROM Terrase"):
         str = ''
         for item in row:
             str = str + item
         x.append(str)
-    z=[]
+    z = []
 
     for row in cur.execute("SELECT Price FROM Terrase"):
-        Price=''
+        Price = ''
         for item in row:
             z.append(item)
 
-    for i in range (len(x)):
+    for i in range(len(x)):
         item = x[i]
         Price = z[i]
         print(item)
         print(Price)
-        new = {item:Price}
+        new = {item: Price}
         menuT.update(new)

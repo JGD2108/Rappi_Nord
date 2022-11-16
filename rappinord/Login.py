@@ -8,13 +8,15 @@ from rappinord.domicilios import Domicilios
 con = sqlite3.connect("Register.db")
 cur = con.cursor()
 
+
 class Login():
     def compareUser():
-        ## Vamos a tener 2 tablas una de usuarios y otra de administrador, dependiendo de
-        ## lo que el usuario escoja se busca en la tabla
+        # Vamos a tener 2 tablas una de usuarios y otra de administrador, dependiendo de
+        # lo que el usuario escoja se busca en la tabla
         Usuario = input("Digite su usuario: ")
         Password = stdiomask.getpass("Password: ")
-        statement = (f"SELECT User from Users WHERE User = '{Usuario}' AND Password = '{Password}'")
+        statement = (
+            f"SELECT User from Users WHERE User = '{Usuario}' AND Password = '{Password}'")
         cur.execute(statement)
         if not cur.fetchone():  # An empty result evaluates to False.
             print("Login failed")
@@ -25,7 +27,8 @@ class Login():
     def compareAdmin():
         Usuario = input("Digite su usuario: ")
         Password = stdiomask.getpass("Password: ")
-        statement = (f"SELECT User from Admin WHERE User = '{Usuario}' AND Password = '{Password}'")
+        statement = (
+            f"SELECT User from Admin WHERE User = '{Usuario}' AND Password = '{Password}'")
         cur.execute(statement)
         if not cur.fetchone():  # An empty result evaluates to False.
             print("Login failed")
@@ -36,14 +39,15 @@ class Login():
     def compareDomiciliario():
         ID = input("Digite su ID: ")
         Password = stdiomask.getpass("Password: ")
-        statement = (f"SELECT ID from Domiciliario WHERE ID = '{ID}' AND Password = '{Password}'")
+        statement = (
+            f"SELECT ID from Domiciliario WHERE ID = '{ID}' AND Password = '{Password}'")
         cur.execute(statement)
         if not cur.fetchone():
             print("Login failed")
         else:
             print("Welcome")
             Domicilios.get_infoD(ID)
- 
+
     def getInfo(Usuario: str):
         statement = (f"SELECT * FROM Users where User = '{Usuario}'")
         cur.execute(statement)
@@ -54,18 +58,19 @@ class Login():
         x = ""
         total = 0
         ubicacion = ""
-        user = User(nombre ,id ,cel ,x , total, ubicacion)
+        user = User(nombre, id, cel, x, total, ubicacion)
         user.Proceso()
 
     def execute():
-        opc1= int(input("1.Login; 2.Register: "))
+        opc1 = int(input("1.Login; 2.Register: "))
         if opc1 == 1:
             while True:
-                opc = int(input("1. Usuario; 2. administrador; 3. Domiciliario: "))
+                opc = int(
+                    input("1. Usuario; 2. administrador; 3. Domiciliario: "))
                 if opc == 1:
                     Login.compareUser()
                     break
-                elif opc == 2: 
+                elif opc == 2:
                     Login.compareAdmin()
                     break
                 elif opc == 3:

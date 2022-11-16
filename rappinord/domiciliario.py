@@ -1,3 +1,5 @@
+from rappinord.domicilios import Domicilios
+
 
 class Domiciliario:
     def __init__(self, name: str, id: int, cel: int, state: str, Domi: list) -> None:
@@ -9,17 +11,18 @@ class Domiciliario:
 
     def disponibilidad(self):
         if self.state == "Available":
-            pass
+            list = Domicilios.get_pedido()
+            print(f"El pedido a entregar es: {list}")
+            name = list[0]
+            Domiciliario.realizar_domicilio(name)
+        else:
+            print("No puede hacer más de un domicilio a la vez")
 
-    def makeAvailable(self, key):
-        x="Available"
-        self.Domi[key] = x
-        return self.Domi
-    
-    def makeOccupied(self, key):
-        x="Occupied"
-        self.Domi[key] = x
-        return self.Domi
+    def realizar_domicilio(nombre: str):
+        print(f"Pedido entregado a {nombre}?")
+        opc = int(input("1. Si"))
+        Domicilios.estado_pedido(opc, nombre)
+
 
 class process():
     def execute():

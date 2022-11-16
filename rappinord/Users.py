@@ -9,17 +9,18 @@ register.executemany("INSERT INTO Users VALUES(?,?,?,?,?)",administrador)
 con.commit()
 con.close()"""
 
+
 class Register():
     def get_Name():
-        Name=input("Digite su nombre: ")
+        Name = input("Digite su nombre: ")
         return Name
 
     def get_User():
-        while True: 
-            User= input("Digite el usuario que desea: ")
-            statement= (f"SELECT User from Users WHERE User='{User}'")
+        while True:
+            User = input("Digite el usuario que desea: ")
+            statement = (f"SELECT User from Users WHERE User='{User}'")
             register.execute(statement)
-            if not register.fetchone(): 
+            if not register.fetchone():
                 print("Usuario valido")
                 break
             else:
@@ -27,13 +28,13 @@ class Register():
         return User
 
     def get_Password():
-        Password= stdiomask.getpass("Digite su contraseña: ")
+        Password = stdiomask.getpass("Digite su contraseña: ")
         return Password
 
     def getCel():
         try:
             Cel = input("Digite su cel: ")
-            while len(Cel)!=10:
+            while len(Cel) != 10:
                 print("Digite un numero de telefono valido: ")
                 Cel = input("Digite su cel: ")
         except ValueError:
@@ -46,9 +47,10 @@ class Register():
         except ValueError:
             print("Digite un numero: ")
         return Id
-    
+
     def Registrar():
-        data = [(Register.get_User(), Register.get_Password(), Register.get_Name(), Register.getCel(), Register.getId())]
-        register.executemany("INSERT INTO Users VALUES(?,?,?,?,?)",data)
+        data = [(Register.get_User(), Register.get_Password(),
+                 Register.get_Name(), Register.getCel(), Register.getId())]
+        register.executemany("INSERT INTO Users VALUES(?,?,?,?,?)", data)
         con.commit()
         con.close()

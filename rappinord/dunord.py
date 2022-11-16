@@ -97,6 +97,7 @@ class Dunord():
         elif opc == 3:
             d.execute("DELETE FROM Domiciliario WHERE Name = ?", (string))
             domiciliario.commit()
+        domiciliario.close()
 
     def AñadirSql(self, opc: int, data):
         """
@@ -116,6 +117,7 @@ class Dunord():
         elif opc == 3:
             d.executemany("INSERT INTO Domiciliario VALUES(?,?,?,?)", data)
             domiciliario.commit()
+        domiciliario.close()
 
     def modificarDomiciliarios(self):
         """

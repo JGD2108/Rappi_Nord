@@ -7,7 +7,8 @@ from rappinord.domicilios import Domicilios
 
 con = sqlite3.connect("Register.db")
 cur = con.cursor()
-
+col = sqlite3.connect("Domiciliario.db")
+curr = col.cursor()
 
 class Login():
     def compareUser():
@@ -22,6 +23,7 @@ class Login():
             print("Login failed")
         else:
             print("Welcome", Usuario)
+            col.close()
             Login.getInfo(Usuario)
 
     def compareAdmin():
@@ -34,18 +36,20 @@ class Login():
             print("Login failed")
         else:
             print("Welcome", Usuario)
+            col.close()
             proceso.execute()
 
     def compareDomiciliario():
         ID = input("Digite su ID: ")
         Password = stdiomask.getpass("Password: ")
         statement = (
-            f"SELECT ID from Domiciliario WHERE ID = '{ID}' AND Password = '{Password}'")
-        cur.execute(statement)
-        if not cur.fetchone():
+            f"SELECT ID from Domiciliarios WHERE ID = '{ID}' AND ID = '{Password}'")
+        curr.execute(statement)
+        if not curr.fetchone():
             print("Login failed")
         else:
             print("Welcome")
+            col.close()
             Domicilios.get_infoD(ID)
 
     def getInfo(Usuario: str):
@@ -59,6 +63,7 @@ class Login():
         total = 0
         ubicacion = ""
         user = User(nombre, id, cel, x, total, ubicacion)
+        col.close()
         user.Proceso()
 
     def execute():

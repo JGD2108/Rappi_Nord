@@ -1,31 +1,45 @@
 @startuml
-
-Class user{
-nombre: str
-id: int
-ubicacion: str
-tel: int
---
-pago()
-pedido()
+Class Register{
+----
+get_Name()
+get_User()
+get_Password()
+getCel()
+getId()
+Registrar()
 }
 
-Class domiciliario{
-nombreD: str
-tel: int
+Class User{
+nombre: str
+id: int
+tel: str
+carrito: str
+total: float
+ubicacion: str
 --
-obtener_rating()
-disponibilidadD()
+pedido(self)
+pago(self)
+pedido_bd(self)
+Proceso(User)
 }
 
 Class dunord{
 cafe: Cafe
 terrase: Terrase
+domicilios: Domicilios
 --
 modificarMenu()
-disponibilidadR()
+Eliminarsql()
+AñadirSql()
+modificarDomiciliarios()
 Escoger_Domiciliario()
 }
+
+Class proceso{
+----
+execute()
+}
+
 
 Class cafe{
 menuC: dict
@@ -35,16 +49,35 @@ Class terrase{
 menuT: dict
 }
 
-Class domicilios{
-domiciliario: Domiciliario
-disponibilidad: disponibilidadD
-
+Class Domiciliario{
+name: str
+id: int
+cel: int
+state: str
+--
+disponibilidad(self, Domis: Domiciliario)
+relizar_domicilio(self, nombre:str, Domis: Domiciliario)
 }
 
+class Domicilios{
+----
+get_infoD(ID: int)
+get_pedido()
+estado_pedido(opc: int, nombre: str)
+process()
+}
+
+class Login{
+----
+compareUser()
+compareAdmin()
+compareDomiciliario()
+getInfo(Usuario: str)
+execute()
+}
 cafe "*" --* "*" dunord
 terrase "*" --* "*" dunord
-domiciliario "*" --* "1" domicilios
-domicilios "*" --* "*" dunord 
-dunord "*" --* "1" user
-
+Domiciliario "*" --* "1" Domicilios
+Domicilios "*" --* "*" dunord
+dunord "*" --* "1" User
 @enduml

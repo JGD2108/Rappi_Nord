@@ -11,9 +11,7 @@ class Domiciliario:
         self.state = state
 
     def disponibilidad(self):
-        con = sqlite3.connect("Domiciliario.bd")
-        cur = con.cursor()
-        for row in cur.execute("SELECT NAME FROM Domiciliarios where state = 'Available'"):
+        if self.state == "Available":
             pass
 
     def makeAvailable(self, key):

@@ -19,6 +19,9 @@ class Domicilios():
         Domis = Domiciliario(nombre, id, cel, state)
         Domis.disponibilidad()
 
+    def get_pedido():
+        statement = (f"SELECT * FROM Pedidos where")
+
     def process():
         Domicilios.get_infoD()
 

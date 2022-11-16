@@ -80,7 +80,7 @@ class User(Cafe,Terrase):
         """
         conection= sqlite3.connect("Domiciliario.db")
         pedido = conection.cursor()
-        data =[(self.nombre, self.carrito, self.total, self.ubicacion, self.tel)]
+        data =[(self.nombre, self.carrito, self.total, self.ubicacion, self.tel, "Pendientes")]
         pedido.executemany("INSERT INTO Pedidos VALUES(?,?,?,?,?)", data)
         conection.commit()
         conection.close()

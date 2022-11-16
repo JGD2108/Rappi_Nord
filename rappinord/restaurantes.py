@@ -53,7 +53,5 @@ class Terrase:
     for i in range(len(x)):
         item = x[i]
         Price = z[i]
-        print(item)
-        print(Price)
         new = {item: Price}
         menuT.update(new)

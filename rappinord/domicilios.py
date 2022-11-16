@@ -11,6 +11,10 @@ class Domiciliario:
         self.state = state
 
     def disponibilidad(self,Domis):
+        """
+        Cambiar a occupied domiciliario 
+        Verificar disponibilidad
+        """
         if self.state == "Available":
             list = Domicilios.get_pedido()
             print(f"El pedido a entregar es: {list}")
@@ -22,6 +26,9 @@ class Domiciliario:
             print("No puede hacer más de un domicilio a la vez")
 
     def realizar_domicilio(self,nombre: str,Domis):
+        """
+        Cambiar a disponible una vez el domicilio este terminado
+        """
         print(f"Pedido entregado a {nombre}?")
         opc = input("1. Si")
         opc = int(opc)
@@ -37,6 +44,10 @@ class process():
 class Domicilios():
 
     def get_infoD(ID):
+        """
+        Obtención de información del domiciliario 
+        dela base de datos para crear el objeto
+        """
         statement = (f"SELECT * FROM Domiciliarios where ID = '{ID}'")
         cur.execute(statement)
         record = cur.fetchone()
@@ -48,6 +59,9 @@ class Domicilios():
         Domis.disponibilidad(Domis)
 
     def get_pedido():
+        """
+        Tomar el pedido de la bd
+        """
         state = "Pendientes"
         statement = (f"SELECT * FROM Pedidos where Estado = '{state}'")
         cur.execute(statement)
@@ -63,6 +77,9 @@ class Domicilios():
         return x
 
     def estado_pedido(opc:int, nombre:str):
+        """
+        Cambiar el estado del pedido
+        """
         if opc == 0:
             cur.execute(f"UPDATE Pedidos SET Estado = 'Entregando' WHERE Name = '{nombre}' ")
             con.commit()

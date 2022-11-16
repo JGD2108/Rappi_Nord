@@ -12,8 +12,8 @@ curr = col.cursor()
 
 class Login():
     def compareUser():
-        # Vamos a tener 2 tablas una de usuarios y otra de administrador, dependiendo de
-        # lo que el usuario escoja se busca en la tabla
+        """ Vamos a tener 2 tablas una de usuarios y otra de administrador, dependiendo de
+         lo que el usuario escoja se busca en la tabla"""
         Usuario = input("Digite su usuario: ")
         Password = stdiomask.getpass("Password: ")
         statement = (
@@ -27,6 +27,9 @@ class Login():
             Login.getInfo(Usuario)
 
     def compareAdmin():
+        """
+        Funcion para iniciar sesion administradores
+        """
         Usuario = input("Digite su usuario: ")
         Password = stdiomask.getpass("Password: ")
         statement = (
@@ -40,6 +43,11 @@ class Login():
             proceso.execute()
 
     def compareDomiciliario():
+        """
+        Funcion inicio de sesion Domiciliario
+        El ususario es se cedula y la contraseña 
+        también
+        """
         ID = input("Digite su ID: ")
         Password = stdiomask.getpass("Password: ")
         statement = (
@@ -53,6 +61,10 @@ class Login():
             Domicilios.get_infoD(ID)
 
     def getInfo(Usuario: str):
+        """
+        Se obtiene la información del usuario 
+        de la bd
+        """
         statement = (f"SELECT * FROM Users where User = '{Usuario}'")
         cur.execute(statement)
         record = cur.fetchone()

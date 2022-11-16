@@ -73,7 +73,7 @@ class User(Cafe,Terrase):
         setattr(User,self.carrito, self.carrito)
         return self.carrito
 
-    def Pedido(self):
+    def pedido_bd(self):
         """
         Esta función va a formalizar el pedido, 
         lo insertará en la base de datos pedidos
@@ -84,10 +84,11 @@ class User(Cafe,Terrase):
         pedido.executemany("INSERT INTO Pedidos VALUES(?,?,?,?,?)", data)
         conection.commit()
         conection.close()
+
     def Proceso(User):
         User.pedido()
         User.pago()
-        User.Pedido()
+        User.pedido_bd()
 
     def __repr__(self) -> str:
         pass

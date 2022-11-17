@@ -35,12 +35,6 @@ modificarDomiciliarios()
 Escoger_Domiciliario()
 }
 
-Class proceso{
-----
-execute()
-}
-
-
 Class cafe{
 menuC: dict
 }

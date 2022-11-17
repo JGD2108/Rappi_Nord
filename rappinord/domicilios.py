@@ -37,10 +37,6 @@ class Domiciliario:
         Domicilios.estado_pedido(opc, nombre)
 
 
-class process():
-    def execute():
-        pass
-
 class Domicilios():
 
     def get_infoD(ID):

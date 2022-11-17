@@ -57,6 +57,8 @@ class Login():
             print("Login failed")
         else:
             print("Welcome")
+            col.execute(f"UPDATE Domiciliarios SET Estado = 'Available' WHERE Id = '{ID}' ")
+            col.commit()
             col.close()
             Domicilios.get_infoD(ID)
 

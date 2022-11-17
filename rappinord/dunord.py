@@ -95,7 +95,7 @@ class Dunord():
             m.execute("DELETE FROM Terrase WHERE Item=?", (string))
             menu.commit()
         elif opc == 3:
-            d.execute("DELETE FROM Domiciliario WHERE Name = ?", (string))
+            d.execute("DELETE FROM Domiciliarios WHERE Name = ?", (string))
             domiciliario.commit()
         domiciliario.close()
 
@@ -115,7 +115,7 @@ class Dunord():
             m.executemany(" INSERT INTO Terrase VALUES(?,?)", data)
             menus.commit()
         elif opc == 3:
-            d.executemany("INSERT INTO Domiciliario VALUES(?,?,?,?)", data)
+            d.executemany("INSERT INTO Domiciliarios VALUES(?,?,?,?)", data)
             domiciliario.commit()
         domiciliario.close()
 
